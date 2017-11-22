@@ -119,6 +119,7 @@ var Player = (function () {
         this.input.start();
     }
     Player.prototype.draw = function () {
+        this.x += this.speed;
         this.playerElement.style.transform = "translate(" + this.x + "px, " + this.y + "px)";
         var volume = this.input.getLevel();
         this.maximumUp = 0;
