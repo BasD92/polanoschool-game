@@ -36,7 +36,7 @@ class Player {
   // Draw player on screen
   public draw(): void {
     // Count x axis with speed value to move
-    //this.x += this.speed;
+    this.x += this.speed;
 
     // Draw element with translate method
     this.playerElement.style.transform = "translate(" + this.x + "px, " + this.y + "px)";
