@@ -1,3 +1,3 @@
 window.addEventListener("load", function () {
-  new Game();
+  Level1.getInstance();
 });
