@@ -8,6 +8,7 @@ class Player {
   public width: number;
 
   public input;
+  public ellipse;
 
   public maximumUp: number;
   public maximumDown: number;
@@ -29,6 +30,8 @@ class Player {
     // Create an Audio input
     this.input = new p5.AudioIn();
 
+    this.ellipse = new p5();
+
     // Start input
     this.input.start();
   }
@@ -48,16 +51,16 @@ class Player {
     this.maximumUp = 0;
     this.maximumDown = 250;
 
-    // If the volume > soundMinimum or < soundMaximum,  player goes up
+    // If the volume > soundMinimum or < soundMaximum, player goes up
     // Else player goes down.
     var soundMinimum = 0.01;
-    var soundMaximum = 1;
+    var soundMaximum = 1.00;
     if (volume > soundMinimum && volume < soundMaximum && this.y > this.maximumUp) {
       console.log('Reactie op geluid!');
       this.y -= 5;
     }
     else if ((volume < soundMinimum || volume > soundMaximum) && this.y < this.maximumDown) {
-      this.y += 1;
+      this.y += 2;
     }
   }
 }

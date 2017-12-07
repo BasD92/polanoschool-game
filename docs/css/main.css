@@ -1,15 +1,23 @@
 body {
   background-color: lightblue;
+  width: auto;
+  margin: 0px;
+  padding: 0px;
 }
 
 body * {
   position: absolute;
   display: block;
-  margin:0px;
-  padding:0px;
+  margin: 0px;
+  padding: 0px;
   /* box-sizing: border-box; */
   background-repeat: no-repeat;
+  width: auto;
 }
+
+/* ::-webkit-scrollbar {
+  display: none;
+} */
 
 player {
   background-image: url(../images/player.png);
@@ -23,4 +31,16 @@ obstacle {
   height: 150px;
   width: 75px;
   /* border: 1px solid red; */
+}
+
+#cont {
+  width: 100%;
+  float: right;
+}
+
+#score {
+  color: white;
+  font-size: 50px;
+  width: 100%;
+  text-align: right;
 }
