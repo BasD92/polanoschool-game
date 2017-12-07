@@ -6,6 +6,7 @@ class Level1 {
   private player: Player;
   private obstacle: Obstacle;
   private obstacle2: Obstacle;
+  private obstacle3: Obstacle;
 
   // Private constructor Singleton
   private constructor() {
@@ -18,8 +19,9 @@ class Level1 {
 
     // Create objects (Player y = 250)
     this.player = new Player(level1, 2, 0, 250);
-    this.obstacle = new Obstacle(level1, 400, 150, 150, 75);
-    this.obstacle2 = new Obstacle(level1, 800, 150, 150, 75);
+    this.obstacle = new Obstacle(level1, 400, 100, 150, 75);
+    this.obstacle2 = new Obstacle(level1, 700, 150, 150, 75);
+    this.obstacle3 = new Obstacle(level1, 1000, 50, 150, 75);
 
     requestAnimationFrame(() => this.gameLoop());
   }
@@ -29,6 +31,7 @@ class Level1 {
     this.player.draw();
     this.obstacle.draw();
     this.obstacle2.draw();
+    this.obstacle3.draw();
 
     // Detect collision
     this.collision();
@@ -76,6 +79,18 @@ class Level1 {
       // Score to zero
       Score.scoreZero(0);
     }
+    else if (this.player.x < this.obstacle3.x + this.obstacle2.width && this.player.x + this.player.width > this.obstacle3.x
+      && this.player.y < this.obstacle3.y + this.obstacle3.height && this.player.height + this.player.y
+      > this.obstacle3.y) {
+    //console.log("Collision obstacle 3");
+
+    // Player to start position
+    this.player.x = 0;
+    this.player.y = 250;
+
+    // Score to zero
+    Score.scoreZero(0);
+    }
     else {
       //console.log("No collision");
     }
@@ -87,6 +102,9 @@ class Level1 {
       Score.scoreUpdate(1);
     }
     else if(this.player.x == this.obstacle2.x + this.obstacle2.width + 1) {
+      Score.scoreUpdate(1);
+    }
+    else if(this.player.x == this.obstacle3.x + this.obstacle3.width + 1) {
       Score.scoreUpdate(1);
     }
   }

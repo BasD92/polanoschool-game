@@ -15,7 +15,7 @@ var Game = (function () {
         return Game.instance;
     };
     Game.prototype.setLevel = function () {
-        if (Score.getScore() < 2) {
+        if (Score.getScore() < 3) {
             Level1.getInstance();
         }
         else {
@@ -37,8 +37,9 @@ var Level1 = (function () {
         level1.setAttribute('id', 'level1');
         document.getElementById('cont').appendChild(level1);
         this.player = new Player(level1, 2, 0, 250);
-        this.obstacle = new Obstacle(level1, 400, 150, 150, 75);
-        this.obstacle2 = new Obstacle(level1, 800, 150, 150, 75);
+        this.obstacle = new Obstacle(level1, 400, 100, 150, 75);
+        this.obstacle2 = new Obstacle(level1, 700, 150, 150, 75);
+        this.obstacle3 = new Obstacle(level1, 1000, 50, 150, 75);
         requestAnimationFrame(function () { return _this.gameLoop(); });
     }
     Level1.prototype.gameLoop = function () {
@@ -46,6 +47,7 @@ var Level1 = (function () {
         this.player.draw();
         this.obstacle.draw();
         this.obstacle2.draw();
+        this.obstacle3.draw();
         this.collision();
         this.avoidObstacles();
         Score.displayScore();
@@ -72,6 +74,13 @@ var Level1 = (function () {
             this.player.y = 250;
             Score.scoreZero(0);
         }
+        else if (this.player.x < this.obstacle3.x + this.obstacle2.width && this.player.x + this.player.width > this.obstacle3.x
+            && this.player.y < this.obstacle3.y + this.obstacle3.height && this.player.height + this.player.y
+            > this.obstacle3.y) {
+            this.player.x = 0;
+            this.player.y = 250;
+            Score.scoreZero(0);
+        }
         else {
         }
     };
@@ -80,6 +89,9 @@ var Level1 = (function () {
             Score.scoreUpdate(1);
         }
         else if (this.player.x == this.obstacle2.x + this.obstacle2.width + 1) {
+            Score.scoreUpdate(1);
+        }
+        else if (this.player.x == this.obstacle3.x + this.obstacle3.width + 1) {
             Score.scoreUpdate(1);
         }
     };
@@ -93,7 +105,8 @@ var Level2 = (function () {
         document.getElementById('cont').appendChild(level2);
         this.player = new Player(level2, 2, 0, 250);
         this.obstacle = new Obstacle(level2, 300, 110, 150, 75);
-        this.obstacle2 = new Obstacle(level2, 750, 50, 150, 75);
+        this.obstacle2 = new Obstacle(level2, 650, 100, 150, 75);
+        this.obstacle3 = new Obstacle(level2, 900, 0, 150, 75);
         requestAnimationFrame(function () { return _this.gameLoop(); });
     }
     Level2.prototype.gameLoop = function () {
@@ -101,6 +114,7 @@ var Level2 = (function () {
         this.player.draw();
         this.obstacle.draw();
         this.obstacle2.draw();
+        this.obstacle3.draw();
         this.collision();
         this.avoidObstacles();
         Score.displayScore();
@@ -127,6 +141,13 @@ var Level2 = (function () {
             this.player.y = 250;
             Score.scoreZero(2);
         }
+        else if (this.player.x < this.obstacle3.x + this.obstacle3.width && this.player.x + this.player.width > this.obstacle3.x
+            && this.player.y < this.obstacle3.y + this.obstacle3.height && this.player.height + this.player.y
+            > this.obstacle3.y) {
+            this.player.x = 0;
+            this.player.y = 250;
+            Score.scoreZero(2);
+        }
         else {
         }
     };
@@ -135,6 +156,9 @@ var Level2 = (function () {
             Score.scoreUpdate(1);
         }
         else if (this.player.x == this.obstacle2.x + this.obstacle2.width + 1) {
+            Score.scoreUpdate(1);
+        }
+        else if (this.player.x == this.obstacle3.x + this.obstacle2.width + 1) {
             Score.scoreUpdate(1);
         }
     };
