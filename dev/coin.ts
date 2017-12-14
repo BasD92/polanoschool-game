@@ -1,12 +1,12 @@
 /// <reference path="gameobject.ts" />
 
-class Obstacle extends GameObject {
+class Coin extends GameObject {
 
   constructor(parent:HTMLElement, setX: number, setY: number, setHeight: number, setWidth: number) {
     super();
 
-    // Append obstacle element to parent (container)
-    this.objectElement = document.createElement("obstacle");
+    // Append coin element to parent (container)
+    this.objectElement = document.createElement("coin");
     parent.appendChild(this.objectElement);
 
     // Set x and y axis

@@ -1,12 +1,12 @@
 /// <reference path="gameobject.ts" />
 
-class Obstacle extends GameObject {
+class AirObstacle extends GameObject {
 
-  constructor(parent:HTMLElement, setX: number, setY: number, setHeight: number, setWidth: number) {
+  constructor(parent:HTMLElement, setX: number, setY: number, setHeight: number) {
     super();
 
-    // Append obstacle element to parent (container)
-    this.objectElement = document.createElement("obstacle");
+    // Append spikes element to parent (container)
+    this.objectElement = document.createElement("spikes");
     parent.appendChild(this.objectElement);
 
     // Set x and y axis
@@ -15,13 +15,13 @@ class Obstacle extends GameObject {
 
     // Set height and width
     this.height = setHeight;
-    this.width = setWidth;
+    //this.width = setWidth;
   }
 
   public draw(): void {
     // Draw element with translate method
     this.objectElement.style.transform = "translate(" + this.x + "px, " + this.y + "px)";
     this.objectElement.style.height = this.height + "px";
-    this.objectElement.style.width = this.width + "px";
+    this.objectElement.style.width = "1200px";
   }
 }

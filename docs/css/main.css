@@ -19,18 +19,30 @@ body * {
   display: none;
 } */
 
+#ground {
+  margin-top: 400px;
+  width: 100%;
+  height: 200px;
+  /* bottom: 0px; */
+  /* position: fixed; */
+}
+
 player {
   background-image: url(../images/player.png);
-  height: 50px;
-  width: 50px;
-  /* border: 1px solid red; */
 }
 
 obstacle {
   background-image: url(../images/wall-obstacle.png);
-  height: 150px;
-  width: 75px;
-  /* border: 1px solid red; */
+}
+
+spikes {
+  background-image: url(../images/spikes.png);
+  /* background-size: contain; */
+}
+
+coin {
+  background-image: url(../images/coin.png);
+  background-size: contain;
 }
 
 #cont {
@@ -41,6 +53,14 @@ obstacle {
 #score {
   color: white;
   font-size: 50px;
-  width: 100%;
-  text-align: right;
+  top: 40px;
+  right: 10px;
+}
+
+#finish {
+  color: white;
+  font-size: 100px;
+  top: 40px;
+  text-align: center;
+  z-index: -1;
 }

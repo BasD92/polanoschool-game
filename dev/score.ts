@@ -6,11 +6,11 @@ class Score {
 
   }
 
-  public static scoreUpdate(s: number) {
+  public static updateScore(s: number) {
     this.score += s;
   }
 
-  public static scoreZero(s: number) {
+  public static resetScore(s: number) {
     this.score = s;
   }
 

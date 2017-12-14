@@ -1,11 +1,8 @@
-class Player {
+/// <reference path="gameobject.ts" />
 
-  private playerElement: HTMLElement;
-  private speed: number;
-  public x: number;
-  public y: number;
-  public height: number;
-  public width: number;
+class Player extends GameObject {
+
+  public speed: number;
 
   public input;
   public ellipse;
@@ -14,9 +11,11 @@ class Player {
   public maximumDown: number;
 
   constructor(parent: HTMLElement, setSpeed: number, setX: number, setY: number) {
+    super();
+
     // Append player element to parent (container)
-    this.playerElement = document.createElement("player");
-    parent.appendChild(this.playerElement);
+    this.objectElement = document.createElement("player");
+    parent.appendChild(this.objectElement);
 
     // Set speed, x and y axis
     this.speed = setSpeed;
@@ -36,31 +35,57 @@ class Player {
     this.input.start();
   }
 
-  // Draw player on screen
   public draw(): void {
+    // Draw element with translate method
+    this.objectElement.style.transform = "translate(" + this.x + "px, " + this.y + "px)";
+    this.objectElement.style.height = this.height + "px";
+    this.objectElement.style.width = this.width + "px";
+  }
+
+  public move() {
     // Count x axis with speed value to move
     this.x += this.speed;
-
-    // Draw element with translate method
-    this.playerElement.style.transform = "translate(" + this.x + "px, " + this.y + "px)";
 
     // Get the overall volume (between 0 and 1.0)
     var volume = this.input.getLevel();
 
     // Maximum up and down move player
     this.maximumUp = 0;
-    this.maximumDown = 250;
+    this.maximumDown = 400;
 
-    // If the volume > soundMinimum or < soundMaximum, player goes up
-    // Else player goes down.
-    var soundMinimum = 0.01;
-    var soundMaximum = 1.00;
+    var soundMinimum = 0.06;
+    var soundMaximum = 0.5;
     if (volume > soundMinimum && volume < soundMaximum && this.y > this.maximumUp) {
       console.log('Reactie op geluid!');
-      this.y -= 5;
+      this.y -= 3;
     }
     else if ((volume < soundMinimum || volume > soundMaximum) && this.y < this.maximumDown) {
-      this.y += 2;
+      this.y += 1.5;
+    }
+  }
+
+  public moveLevel2(): void {
+    // Count x axis with speed value to move
+    this.x += this.speed;
+
+    // Get the overall volume (between 0 and 1.0)
+    var volume = this.input.getLevel();
+
+    // Maximum up and down move player
+    this.maximumUp = 0;
+    this.maximumDown = 400;
+
+    var soundMinimum = 0.03;
+    var soundMedium = 0.10;
+    var soundMaximum = 0.5;
+
+    if (volume > soundMedium && volume < soundMaximum && this.y > this.maximumUp) {
+      console.log('Hard praten, speler gaat omhoog.');
+      this.y -= 3;
+    }
+    else if (volume > soundMinimum && volume < soundMedium && this.y < this.maximumDown) {
+      console.log('Zacht praten, speler gaat omlaag.');
+      this.y += 3;
     }
   }
 }
