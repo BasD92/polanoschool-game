@@ -69,7 +69,7 @@ var Game = (function () {
         return Game.instance;
     };
     Game.prototype.setLevel = function () {
-        if (Score.getScore() < 1000) {
+        if (Score.getScore() < 3) {
             Level1.getInstance();
         }
         else {

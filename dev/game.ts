@@ -24,7 +24,7 @@ class Game {
 
   // Change level when reach a score
   private setLevel(): void {
-    if (Score.getScore() < 1000) {
+    if (Score.getScore() < 3) {
       Level1.getInstance();
     }
     else {
