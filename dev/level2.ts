@@ -93,14 +93,14 @@ class Level2 extends Level {
         this.player.y = 200;
 
         // Score to zero
-        Score.resetScore(0);
+        Score.resetScore(3);
       }
-      else if(this.player.x > 1250 && Score.getScore() < 84) {
+      else if(this.player.x > 1250 && Score.getScore() < 81) {
         // Player to start position
         this.player.x = 0;
         this.player.y = 200;
       }
-      else if(this.player.x > 1250 && Score.getScore() > 5) {
+      else if(this.player.x > 1250 && Score.getScore() > 81) {
         this.player.speed = 0;
         document.getElementById('finish').innerHTML = "Je hebt het gehaald! Gefeliciteerd!"
       }

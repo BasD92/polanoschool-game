@@ -25,7 +25,7 @@ class Game {
   // Change level when reach a score
   private setLevel(): void {
     if (Score.getScore() < 1000) {
-      Level2.getInstance();
+      Level1.getInstance();
     }
     else {
       // Remove HTML element of old level

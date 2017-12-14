@@ -70,7 +70,7 @@ var Game = (function () {
     };
     Game.prototype.setLevel = function () {
         if (Score.getScore() < 1000) {
-            Level2.getInstance();
+            Level1.getInstance();
         }
         else {
             document.getElementById("level1").remove();
@@ -212,13 +212,13 @@ var Level2 = (function (_super) {
             else if (this.player.y < 35) {
                 this.player.x = 0;
                 this.player.y = 200;
-                Score.resetScore(0);
+                Score.resetScore(3);
             }
-            else if (this.player.x > 1250 && Score.getScore() < 84) {
+            else if (this.player.x > 1250 && Score.getScore() < 81) {
                 this.player.x = 0;
                 this.player.y = 200;
             }
-            else if (this.player.x > 1250 && Score.getScore() > 5) {
+            else if (this.player.x > 1250 && Score.getScore() > 81) {
                 this.player.speed = 0;
                 document.getElementById('finish').innerHTML = "Je hebt het gehaald! Gefeliciteerd!";
             }
