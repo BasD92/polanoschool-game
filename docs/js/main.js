@@ -69,13 +69,7 @@ var Game = (function () {
         return Game.instance;
     };
     Game.prototype.setLevel = function () {
-        if (Score.getScore() < 3) {
-            Level1.getInstance();
-        }
-        else {
-            document.getElementById("level1").remove();
-            Level2.getInstance();
-        }
+        Level2.getInstance();
     };
     return Game;
 }());
@@ -98,10 +92,10 @@ var Level1 = (function (_super) {
         level1.setAttribute('id', 'level1');
         document.getElementById('cont').appendChild(level1);
         _this.airObstacle = new AirObstacle(level1, 0, 0, 40);
-        _this.player = new Player(level1, 2, 0, 400);
-        _this.obstacle = new Obstacle(level1, 350, 300, 150, 75);
-        _this.obstacle2 = new Obstacle(level1, 650, 100, 150, 75);
-        _this.obstacle3 = new Obstacle(level1, 1000, 200, 150, 75);
+        _this.player = new Player(level1, 2, 0, 370);
+        _this.obstacle = new Obstacle(level1, 350, 300, 75, 100);
+        _this.obstacle2 = new Obstacle(level1, 650, 100, 75, 100);
+        _this.obstacle3 = new Obstacle(level1, 1000, 300, 75, 100);
         _this.allObjects.push(_this.player, _this.obstacle, _this.obstacle2, _this.obstacle3);
         _this.obstacles.push(_this.obstacle, _this.obstacle2, _this.obstacle3);
         requestAnimationFrame(function () { return _this.gameLoop(); });
@@ -132,12 +126,12 @@ var Level1 = (function (_super) {
             if (this.player.x < obstacle.x + obstacle.width && this.player.x + this.player.width > obstacle.x
                 && this.player.y < obstacle.y + obstacle.height && this.player.height + this.player.y > obstacle.y) {
                 this.player.x = 0;
-                this.player.y = 400;
+                this.player.y = 370;
                 Score.resetScore(0);
             }
             else if (this.player.y < 35) {
                 this.player.x = 0;
-                this.player.y = 400;
+                this.player.y = 370;
                 Score.resetScore(0);
             }
             else {
@@ -145,13 +139,13 @@ var Level1 = (function (_super) {
         }
     };
     Level1.prototype.avoidObstacles = function () {
-        if (this.player.x == this.obstacle.x + this.obstacle.width + 1) {
+        if (this.player.x == this.obstacle.x + this.obstacle.width) {
             Score.updateScore(1);
         }
-        else if (this.player.x == this.obstacle2.x + this.obstacle2.width + 1) {
+        else if (this.player.x == this.obstacle2.x + this.obstacle2.width) {
             Score.updateScore(1);
         }
-        else if (this.player.x == this.obstacle3.x + this.obstacle2.width + 1) {
+        else if (this.player.x == this.obstacle3.x + this.obstacle2.width) {
             Score.updateScore(1);
         }
     };
@@ -166,16 +160,14 @@ var Level2 = (function (_super) {
         document.getElementById('cont').appendChild(level2);
         _this.airObstacle = new AirObstacle(level2, 0, 0, 40);
         _this.player = new Player(level2, 2, 0, 200);
-        _this.obstacle = new Obstacle(level2, 500, 50, 60, 20);
-        _this.obstacle2 = new Obstacle(level2, 500, 200, 60, 20);
-        _this.obstacle3 = new Obstacle(level2, 500, 380, 60, 20);
-        _this.obstacle4 = new Obstacle(level2, 1150, 110, 60, 20);
-        _this.obstacle5 = new Obstacle(level2, 1150, 260, 60, 20);
-        _this.obstacle6 = new Obstacle(level2, 1150, 400, 60, 20);
+        _this.obstacle = new Obstacle(level2, 700, 50, 70, 100);
+        _this.obstacle2 = new Obstacle(level2, 400, 250, 70, 100);
+        _this.obstacle3 = new Obstacle(level2, 700, 380, 70, 100);
+        _this.obstacle4 = new Obstacle(level2, 1150, 200, 70, 100);
         _this.coin = new Coin(level2, 500, 140, 30, 30);
         _this.coin2 = new Coin(level2, 1150, 340, 30, 30);
-        _this.allObjects.push(_this.player, _this.obstacle, _this.obstacle2, _this.obstacle3, _this.obstacle4, _this.obstacle5, _this.obstacle6);
-        _this.obstacles.push(_this.obstacle, _this.obstacle2, _this.obstacle3, _this.obstacle4, _this.obstacle5, _this.obstacle6);
+        _this.allObjects.push(_this.player, _this.obstacle, _this.obstacle2, _this.obstacle3, _this.obstacle4);
+        _this.obstacles.push(_this.obstacle, _this.obstacle2, _this.obstacle3, _this.obstacle4);
         requestAnimationFrame(function () { return _this.gameLoop(); });
         return _this;
     }
@@ -269,8 +261,8 @@ var Player = (function (_super) {
         _this.speed = setSpeed;
         _this.x = setX;
         _this.y = setY;
-        _this.height = 50;
-        _this.width = 50;
+        _this.height = 75;
+        _this.width = 60;
         _this.input = new p5.AudioIn();
         _this.ellipse = new p5();
         _this.input.start();
@@ -282,14 +274,18 @@ var Player = (function (_super) {
         this.objectElement.style.width = this.width + "px";
     };
     Player.prototype.move = function () {
-        this.x += this.speed;
+        if (this.x < 1250) {
+            this.x += this.speed;
+        }
         var volume = this.input.getLevel();
         this.maximumUp = 0;
-        this.maximumDown = 400;
-        var soundMinimum = 0.06;
-        var soundMaximum = 0.5;
-        if (volume > soundMinimum && volume < soundMaximum && this.y > this.maximumUp) {
-            console.log('Reactie op geluid!');
+        this.maximumDown = 370;
+        var soundMinimum = 0.1;
+        var soundMaximum = 1;
+        if (volume > 0.3 && this.y > this.maximumUp) {
+            this.y -= 10;
+        }
+        else if (volume > soundMinimum && volume < soundMaximum && this.y > this.maximumUp) {
             this.y -= 3;
         }
         else if ((volume < soundMinimum || volume > soundMaximum) && this.y < this.maximumDown) {
@@ -301,15 +297,16 @@ var Player = (function (_super) {
         var volume = this.input.getLevel();
         this.maximumUp = 0;
         this.maximumDown = 400;
-        var soundMinimum = 0.03;
-        var soundMedium = 0.10;
-        var soundMaximum = 0.5;
-        if (volume > soundMedium && volume < soundMaximum && this.y > this.maximumUp) {
-            console.log('Hard praten, speler gaat omhoog.');
+        var soundMinimum = 0.04;
+        var soundMedium = 0.12;
+        var soundMaximum = 1;
+        if (volume > 0.3 && this.y > this.maximumUp) {
+            this.y -= 10;
+        }
+        else if (volume > soundMedium && volume < soundMaximum && this.y > this.maximumUp) {
             this.y -= 3;
         }
         else if (volume > soundMinimum && volume < soundMedium && this.y < this.maximumDown) {
-            console.log('Zacht praten, speler gaat omlaag.');
             this.y += 3;
         }
     };

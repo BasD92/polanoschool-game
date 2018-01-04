@@ -24,13 +24,14 @@ class Game {
 
   // Change level when reach a score
   private setLevel(): void {
-    if (Score.getScore() < 3) {
-      Level1.getInstance();
-    }
-    else {
-      // Remove HTML element of old level
-      document.getElementById("level1").remove();
-      Level2.getInstance();
-    }
+    // if (Score.getScore() < 3) {
+    //   Level1.getInstance();
+    // }
+    // else {
+    //   // Remove HTML element of old level
+    //   document.getElementById("level1").remove();
+    //   Level2.getInstance();
+    // }
+    Level2.getInstance();
   }
 }

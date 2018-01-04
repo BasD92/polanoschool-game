@@ -15,10 +15,10 @@ class Level1 extends Level {
 
     // Create objects
     this.airObstacle = new AirObstacle(level1, 0, 0, 40);
-    this.player = new Player(level1, 2, 0, 400);
-    this.obstacle = new Obstacle(level1, 350, 300, 150, 75);
-    this.obstacle2 = new Obstacle(level1, 650, 100, 150, 75);
-    this.obstacle3 = new Obstacle(level1, 1000, 200, 150, 75);
+    this.player = new Player(level1, 2, 0, 370);
+    this.obstacle = new Obstacle(level1, 350, 300, 75, 100);
+    this.obstacle2 = new Obstacle(level1, 650, 100, 75, 100);
+    this.obstacle3 = new Obstacle(level1, 1000, 300, 75, 100);
 
     // Push all objects to array
     this.allObjects.push(this.player, this.obstacle, this.obstacle2, this.obstacle3);
@@ -70,7 +70,7 @@ class Level1 extends Level {
         && this.player.y < obstacle.y + obstacle.height && this.player.height + this.player.y > obstacle.y) {
         // Player to start position
         this.player.x = 0;
-        this.player.y = 400;
+        this.player.y = 370;
 
         // Score to zero
         Score.resetScore(0);
@@ -78,7 +78,7 @@ class Level1 extends Level {
       else if (this.player.y < 35) {
         // Player to start position
         this.player.x = 0;
-        this.player.y = 400;
+        this.player.y = 370;
 
         // Score to zero
         Score.resetScore(0);
@@ -91,13 +91,13 @@ class Level1 extends Level {
 
   // Count score when player avoid obstacles
   avoidObstacles() {
-    if (this.player.x == this.obstacle.x + this.obstacle.width + 1) {
+    if (this.player.x == this.obstacle.x + this.obstacle.width) {
       Score.updateScore(1);
     }
-    else if (this.player.x == this.obstacle2.x + this.obstacle2.width + 1) {
+    else if (this.player.x == this.obstacle2.x + this.obstacle2.width) {
       Score.updateScore(1);
     }
-    else if (this.player.x == this.obstacle3.x + this.obstacle2.width + 1) {
+    else if (this.player.x == this.obstacle3.x + this.obstacle2.width) {
       Score.updateScore(1);
     }
   }

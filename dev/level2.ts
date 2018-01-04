@@ -17,22 +17,18 @@ class Level2 extends Level {
     // Create objects
     this.airObstacle = new AirObstacle(level2, 0, 0, 40);
     this.player = new Player(level2, 2, 0, 200);
-    this.obstacle = new Obstacle(level2, 500, 50, 60, 20);
-    this.obstacle2 = new Obstacle(level2, 500, 200, 60, 20);
-    this.obstacle3 = new Obstacle(level2, 500, 380, 60, 20);
-    this.obstacle4 = new Obstacle(level2, 1150, 110, 60, 20);
-    this.obstacle5 = new Obstacle(level2, 1150, 260, 60, 20);
-    this.obstacle6 = new Obstacle(level2, 1150, 400, 60, 20);
+    this.obstacle = new Obstacle(level2, 700, 50, 70, 100);
+    this.obstacle2 = new Obstacle(level2, 400, 250, 70, 100);
+    this.obstacle3 = new Obstacle(level2, 700, 380, 70, 100);
+    this.obstacle4 = new Obstacle(level2, 1150, 200, 70, 100);
     this.coin = new Coin(level2, 500, 140, 30, 30);
     this.coin2 = new Coin(level2, 1150, 340, 30, 30);
 
     // Push all objects to array
-    this.allObjects.push(this.player, this.obstacle, this.obstacle2, this.obstacle3, this.obstacle4, this.obstacle5,
-    this.obstacle6);
+    this.allObjects.push(this.player, this.obstacle, this.obstacle2, this.obstacle3, this.obstacle4);
 
     // Push al obstacle objects to array
-    this.obstacles.push(this.obstacle, this.obstacle2, this.obstacle3, this.obstacle4, this.obstacle5,
-    this.obstacle6);
+    this.obstacles.push(this.obstacle, this.obstacle2, this.obstacle3, this.obstacle4);
 
     requestAnimationFrame(() => this.gameLoop());
   }

@@ -23,8 +23,8 @@ class Player extends GameObject {
     this.y = setY;
 
     // Set height and width
-    this.height = 50;
-    this.width = 50;
+    this.height = 75;
+    this.width = 60;
 
     // Create an Audio input
     this.input = new p5.AudioIn();
@@ -44,19 +44,24 @@ class Player extends GameObject {
 
   public move() {
     // Count x axis with speed value to move
-    this.x += this.speed;
+    if(this.x < 1250) {
+      this.x += this.speed;
+    }
 
     // Get the overall volume (between 0 and 1.0)
     var volume = this.input.getLevel();
 
     // Maximum up and down move player
     this.maximumUp = 0;
-    this.maximumDown = 400;
+    this.maximumDown = 370;
 
-    var soundMinimum = 0.06;
-    var soundMaximum = 0.5;
-    if (volume > soundMinimum && volume < soundMaximum && this.y > this.maximumUp) {
-      console.log('Reactie op geluid!');
+    var soundMinimum = 0.1;
+    var soundMaximum = 1;
+    if (volume > 0.3 && this.y > this.maximumUp) {
+      this.y -= 10;
+    }
+    else if (volume > soundMinimum && volume < soundMaximum && this.y > this.maximumUp) {
+      //console.log('Reactie op geluid!');
       this.y -= 3;
     }
     else if ((volume < soundMinimum || volume > soundMaximum) && this.y < this.maximumDown) {
@@ -75,16 +80,19 @@ class Player extends GameObject {
     this.maximumUp = 0;
     this.maximumDown = 400;
 
-    var soundMinimum = 0.03;
-    var soundMedium = 0.10;
-    var soundMaximum = 0.5;
+    var soundMinimum = 0.04;
+    var soundMedium = 0.12;
+    var soundMaximum = 1;
 
-    if (volume > soundMedium && volume < soundMaximum && this.y > this.maximumUp) {
-      console.log('Hard praten, speler gaat omhoog.');
+    if (volume > 0.3 && this.y > this.maximumUp) {
+      this.y -= 10;
+    }
+    else if (volume > soundMedium && volume < soundMaximum && this.y > this.maximumUp) {
+      //console.log('Hard praten, speler gaat omhoog.');
       this.y -= 3;
     }
     else if (volume > soundMinimum && volume < soundMedium && this.y < this.maximumDown) {
-      console.log('Zacht praten, speler gaat omlaag.');
+      //console.log('Zacht praten, speler gaat omlaag.');
       this.y += 3;
     }
   }
