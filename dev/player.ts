@@ -43,6 +43,19 @@ class Player extends GameObject {
   }
 
   public move() {
+    // var xmlhttp = new XMLHttpRequest();
+    //  var test = xmlhttp.onreadystatechange = function() {
+    //     if (this.readyState == 4 && this.status == 200) {
+    //         var myObj = JSON.parse(this.responseText);
+    //         return myObj[0].minimum;
+    //     } else {
+    //       alert('Connectie met de server is mislukt. Probeer het nog een keer.');
+    //     }
+    // };
+
+    // xmlhttp.open("GET", "http://localhost/polanoschool-game/docs/php/getSettings.php", true);
+    // xmlhttp.send();
+
     // Count x axis with speed value to move
     if(this.x < 1250) {
       this.x += this.speed;

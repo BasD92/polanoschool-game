@@ -69,7 +69,13 @@ var Game = (function () {
         return Game.instance;
     };
     Game.prototype.setLevel = function () {
-        Level2.getInstance();
+        if (Score.getScore() < 3) {
+            Level1.getInstance();
+        }
+        else {
+            document.getElementById("level1").remove();
+            Level2.getInstance();
+        }
     };
     return Game;
 }());
@@ -330,4 +336,13 @@ var Score = (function () {
     return Score;
 }());
 Score.score = 0;
+var xmlhttp = new XMLHttpRequest();
+xmlhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+        var myObj = JSON.parse(this.responseText);
+        return myObj[0].speed;
+    }
+};
+xmlhttp.open("GET", "http://localhost/polanoschool-game/docs/php/getSettings.php", true);
+xmlhttp.send();
 //# sourceMappingURL=main.js.map
