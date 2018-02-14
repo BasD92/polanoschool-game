@@ -52,6 +52,11 @@ var Coin = (function (_super) {
     };
     return Coin;
 }(GameObject));
+var Database = (function () {
+    function Database() {
+    }
+    return Database;
+}());
 var Game = (function () {
     function Game() {
         var _this = this;
@@ -336,14 +341,4 @@ var Score = (function () {
     return Score;
 }());
 Score.score = 0;
-var xmlhttp = new XMLHttpRequest();
-xmlhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-        var myObj = JSON.parse(this.responseText);
-        console.log(myObj[0].speed);
-        return myObj[0].speed;
-    }
-};
-xmlhttp.open("GET", "http://localhost/polanoschool-game/docs/php/getSettings.php", true);
-xmlhttp.send();
 //# sourceMappingURL=main.js.map
