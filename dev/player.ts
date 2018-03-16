@@ -2,7 +2,7 @@
 
 class Player extends GameObject {
 
-  public speed: number;
+  //public speed: number;
 
   public input;
   public ellipse;
@@ -10,15 +10,21 @@ class Player extends GameObject {
   public maximumUp: number;
   public maximumDown: number;
 
-  constructor(parent: HTMLElement, setSpeed: number, setX: number, setY: number) {
+  public test: number;
+
+  public speed: number = Number(localStorage.getItem("speed"));
+  public soundMinimum = localStorage.getItem("minimum");
+  public soundMedium = localStorage.getItem("medium");
+  public soundMaximum = localStorage.getItem("maximum");
+
+  constructor(parent: HTMLElement, setX: number, setY: number) {
     super();
 
     // Append player element to parent (container)
     this.objectElement = document.createElement("player");
     parent.appendChild(this.objectElement);
 
-    // Set speed, x and y axis
-    this.speed = setSpeed;
+    // Set x and y axis
     this.x = setX;
     this.y = setY;
 
@@ -43,18 +49,6 @@ class Player extends GameObject {
   }
 
   public move() {
-    // var xmlhttp = new XMLHttpRequest();
-    //  var test = xmlhttp.onreadystatechange = function() {
-    //     if (this.readyState == 4 && this.status == 200) {
-    //         var myObj = JSON.parse(this.responseText);
-    //         return myObj[0].minimum;
-    //     } else {
-    //       alert('Connectie met de server is mislukt. Probeer het nog een keer.');
-    //     }
-    // };
-
-    // xmlhttp.open("GET", "http://localhost/polanoschool-game/docs/php/getSettings.php", true);
-    // xmlhttp.send();
 
     // Count x axis with speed value to move
     if(this.x < 1250) {
@@ -68,16 +62,14 @@ class Player extends GameObject {
     this.maximumUp = 0;
     this.maximumDown = 370;
 
-    var soundMinimum = 0.1;
-    var soundMaximum = 1;
     if (volume > 0.3 && this.y > this.maximumUp) {
       this.y -= 10;
     }
-    else if (volume > soundMinimum && volume < soundMaximum && this.y > this.maximumUp) {
+    else if (volume > this.soundMinimum && volume < this.soundMaximum && this.y > this.maximumUp) {
       //console.log('Reactie op geluid!');
       this.y -= 3;
     }
-    else if ((volume < soundMinimum || volume > soundMaximum) && this.y < this.maximumDown) {
+    else if ((volume < this.soundMinimum || volume > this.soundMaximum) && this.y < this.maximumDown) {
       this.y += 1.5;
     }
   }
@@ -94,17 +86,16 @@ class Player extends GameObject {
     this.maximumDown = 400;
 
     var soundMinimum = 0.04;
-    var soundMedium = 0.12;
     var soundMaximum = 1;
 
     if (volume > 0.3 && this.y > this.maximumUp) {
       this.y -= 10;
     }
-    else if (volume > soundMedium && volume < soundMaximum && this.y > this.maximumUp) {
+    else if (volume > this.soundMedium && volume < this.soundMaximum && this.y > this.maximumUp) {
       //console.log('Hard praten, speler gaat omhoog.');
       this.y -= 3;
     }
-    else if (volume > soundMinimum && volume < soundMedium && this.y < this.maximumDown) {
+    else if (volume > this.soundMinimum && volume < this.soundMedium && this.y < this.maximumDown) {
       //console.log('Zacht praten, speler gaat omlaag.');
       this.y += 3;
     }

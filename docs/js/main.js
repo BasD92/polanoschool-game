@@ -55,6 +55,31 @@ var Coin = (function (_super) {
 var Database = (function () {
     function Database() {
     }
+    Database.getData = function () {
+        $.ajax({
+            dataType: 'json',
+            url: 'http://sebastiaandingemans.nl/polano/getSettings.php',
+            type: 'GET',
+            success: this.successData,
+            error: this.errorData
+        });
+    };
+    Database.successData = function (response) {
+        $.each(response, function (i, item) {
+            if (typeof (Storage) !== "undefined") {
+                localStorage.setItem("speed", item['speed']);
+                localStorage.setItem("minimum", item['minimum']);
+                localStorage.setItem("medium", item['medium']);
+                localStorage.setItem("maximum", item['maximum']);
+            }
+            else {
+                alert('Schakel localStorage in voor een goede werking van deze app.');
+            }
+        });
+    };
+    Database.errorData = function () {
+        console.log('De verbinding met de server is mislukt.');
+    };
     return Database;
 }());
 var Game = (function () {
@@ -103,7 +128,7 @@ var Level1 = (function (_super) {
         level1.setAttribute('id', 'level1');
         document.getElementById('cont').appendChild(level1);
         _this.airObstacle = new AirObstacle(level1, 0, 0, 40);
-        _this.player = new Player(level1, 2, 0, 370);
+        _this.player = new Player(level1, 0, 370);
         _this.obstacle = new Obstacle(level1, 350, 300, 75, 100);
         _this.obstacle2 = new Obstacle(level1, 650, 100, 75, 100);
         _this.obstacle3 = new Obstacle(level1, 1000, 300, 75, 100);
@@ -170,7 +195,7 @@ var Level2 = (function (_super) {
         level2.setAttribute('id', 'level2');
         document.getElementById('cont').appendChild(level2);
         _this.airObstacle = new AirObstacle(level2, 0, 0, 40);
-        _this.player = new Player(level2, 2, 0, 200);
+        _this.player = new Player(level2, 0, 200);
         _this.obstacle = new Obstacle(level2, 700, 50, 70, 100);
         _this.obstacle2 = new Obstacle(level2, 400, 250, 70, 100);
         _this.obstacle3 = new Obstacle(level2, 700, 380, 70, 100);
@@ -242,6 +267,7 @@ var Level2 = (function (_super) {
     return Level2;
 }(Level));
 window.addEventListener("load", function () {
+    Database.getData();
     Game.getInstance();
 });
 var Obstacle = (function (_super) {
@@ -265,11 +291,14 @@ var Obstacle = (function (_super) {
 }(GameObject));
 var Player = (function (_super) {
     __extends(Player, _super);
-    function Player(parent, setSpeed, setX, setY) {
+    function Player(parent, setX, setY) {
         var _this = _super.call(this) || this;
+        _this.speed = Number(localStorage.getItem("speed"));
+        _this.soundMinimum = localStorage.getItem("minimum");
+        _this.soundMedium = localStorage.getItem("medium");
+        _this.soundMaximum = localStorage.getItem("maximum");
         _this.objectElement = document.createElement("player");
         parent.appendChild(_this.objectElement);
-        _this.speed = setSpeed;
         _this.x = setX;
         _this.y = setY;
         _this.height = 75;
@@ -291,15 +320,13 @@ var Player = (function (_super) {
         var volume = this.input.getLevel();
         this.maximumUp = 0;
         this.maximumDown = 370;
-        var soundMinimum = 0.1;
-        var soundMaximum = 1;
         if (volume > 0.3 && this.y > this.maximumUp) {
             this.y -= 10;
         }
-        else if (volume > soundMinimum && volume < soundMaximum && this.y > this.maximumUp) {
+        else if (volume > this.soundMinimum && volume < this.soundMaximum && this.y > this.maximumUp) {
             this.y -= 3;
         }
-        else if ((volume < soundMinimum || volume > soundMaximum) && this.y < this.maximumDown) {
+        else if ((volume < this.soundMinimum || volume > this.soundMaximum) && this.y < this.maximumDown) {
             this.y += 1.5;
         }
     };
@@ -309,15 +336,14 @@ var Player = (function (_super) {
         this.maximumUp = 0;
         this.maximumDown = 400;
         var soundMinimum = 0.04;
-        var soundMedium = 0.12;
         var soundMaximum = 1;
         if (volume > 0.3 && this.y > this.maximumUp) {
             this.y -= 10;
         }
-        else if (volume > soundMedium && volume < soundMaximum && this.y > this.maximumUp) {
+        else if (volume > this.soundMedium && volume < this.soundMaximum && this.y > this.maximumUp) {
             this.y -= 3;
         }
-        else if (volume > soundMinimum && volume < soundMedium && this.y < this.maximumDown) {
+        else if (volume > this.soundMinimum && volume < this.soundMedium && this.y < this.maximumDown) {
             this.y += 3;
         }
     };

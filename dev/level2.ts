@@ -16,7 +16,7 @@ class Level2 extends Level {
 
     // Create objects
     this.airObstacle = new AirObstacle(level2, 0, 0, 40);
-    this.player = new Player(level2, 2, 0, 200);
+    this.player = new Player(level2, 0, 200);
     this.obstacle = new Obstacle(level2, 700, 50, 70, 100);
     this.obstacle2 = new Obstacle(level2, 400, 250, 70, 100);
     this.obstacle3 = new Obstacle(level2, 700, 380, 70, 100);

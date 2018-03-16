@@ -22,7 +22,7 @@ while($row = mysqli_fetch_object($result))
 // Convert array to json
 header("Content-Type: application/json");
 header('Access-Control-Allow-Origin: *');
-echo json_encode($rows);
+echo json_encode($rows, JSON_NUMERIC_CHECK);
 
 // Close connection
 mysqli_close($con);
