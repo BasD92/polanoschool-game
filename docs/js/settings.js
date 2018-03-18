@@ -19,7 +19,7 @@ function saveSettings(e) {
     // Send values from input to backend
     $.ajax({
       type: 'POST',
-      url: 'http://sebastiaandingemans.nl/polano/saveSettings.php',
+      url: 'https://stud.hosted.hr.nl/0847433/polano/saveSettings.php',
       data: {
         speed: speed,
         minimumVolume: minimumVolume,

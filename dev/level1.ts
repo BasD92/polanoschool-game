@@ -97,7 +97,7 @@ class Level1 extends Level {
     else if (this.player.x == this.obstacle2.x + this.obstacle2.width) {
       Score.updateScore(1);
     }
-    else if (this.player.x == this.obstacle3.x + this.obstacle2.width) {
+    else if (this.player.x == this.obstacle3.x + this.obstacle3.width) {
       Score.updateScore(1);
     }
   }

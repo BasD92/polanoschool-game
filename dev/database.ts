@@ -9,7 +9,7 @@ class Database {
   static getData() {
     $.ajax({
       dataType: 'json',
-      url: 'http://sebastiaandingemans.nl/polano/getSettings.php',
+      url: 'https://stud.hosted.hr.nl/0847433/polano/getSettings.php',
       type: 'GET',
       success: this.successData,
       error: this.errorData

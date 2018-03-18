@@ -58,7 +58,7 @@ var Database = (function () {
     Database.getData = function () {
         $.ajax({
             dataType: 'json',
-            url: 'http://sebastiaandingemans.nl/polano/getSettings.php',
+            url: 'https://stud.hosted.hr.nl/0847433/polano/getSettings.php',
             type: 'GET',
             success: this.successData,
             error: this.errorData
@@ -181,7 +181,7 @@ var Level1 = (function (_super) {
         else if (this.player.x == this.obstacle2.x + this.obstacle2.width) {
             Score.updateScore(1);
         }
-        else if (this.player.x == this.obstacle3.x + this.obstacle2.width) {
+        else if (this.player.x == this.obstacle3.x + this.obstacle3.width) {
             Score.updateScore(1);
         }
     };
