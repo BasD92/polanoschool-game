@@ -248,7 +248,7 @@ var Level2 = (function (_super) {
             }
             else if (this.player.x > 1250 && Score.getScore() >= 81) {
                 this.player.speed = 0;
-                document.getElementById('finish').innerHTML = "Je hebt het gehaald! Gefeliciteerd!";
+                document.getElementById('finish').innerHTML = "Congrats!";
             }
             else {
             }

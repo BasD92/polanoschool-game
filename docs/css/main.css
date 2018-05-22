@@ -63,7 +63,6 @@ coin {
   color: white;
   font-size: 100px;
   top: 40px;
-  text-align: center;
-  z-index: -1;
+  margin-left: 40px;
 }
 
