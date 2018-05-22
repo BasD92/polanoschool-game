@@ -98,7 +98,7 @@ class Level2 extends Level {
       }
       else if(this.player.x > 1250 && Score.getScore() >= 81) {
         this.player.speed = 0;
-        document.getElementById('finish').innerHTML = "Congrats!"
+        document.getElementById('finish').innerHTML = "Congrats!!"
       }
       else {
         //console.log("No collision");
